@@ -10,7 +10,10 @@ val app = crossProject.settings(
     "com.lihaoyi" %%% "upickle" % "0.2.7",
     "io.circe" %%% "circe-core" % "0.2.0",
     "io.circe" %%% "circe-parse" % "0.2.0",
-    "io.circe" %%% "circe-generic" % "0.2.0"
+    "io.circe" %%% "circe-generic" % "0.2.0",
+    "com.lihaoyi" %%% "scalarx" % "0.2.8",
+    "com.github.japgolly.scalacss" %%% "core" % "0.5.1",
+    "com.github.japgolly.scalacss" %%% "ext-scalatags" % "0.5.1"
   ),
   scalaVersion := "2.11.8"
 ).jsSettings(

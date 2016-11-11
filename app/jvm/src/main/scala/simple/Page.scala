@@ -3,7 +3,7 @@ package simple
 import scalatags.Text.all._
 object Page {
 
-  val boot = "simple.app.App().main(document.getElementById('app'))"
+  val boot = "simple.app.App().main(document)"
 
   val skeleton =
     html(
@@ -12,9 +12,6 @@ object Page {
         link(rel:="stylesheet", href:="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
         link(rel:="script", href:="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
       ),
-      body(
-        onload:=boot,
-        div(id:="app")
-      )
+      body(onload:=boot)
     )
 }

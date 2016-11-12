@@ -13,9 +13,6 @@ object Requester {
       .get(s"/mail/$mail")
       .map(response => parse(response.responseText).flatMap(_.as[Tags]).getOrElse(Tags(List.empty)))
 
-  def register(mail: String, tags: Tags) = {
-    Ajax
+  def register(mail: String, tags: Tags) = Ajax
       .post(s"/mail/$mail", tags.asJson.noSpaces, headers = Map("Content-Type" -> "application/json"))
-    println("posting " + tags.asJson.noSpaces+ " to " + mail)
-  }
 }

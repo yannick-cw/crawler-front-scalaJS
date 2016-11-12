@@ -2,52 +2,54 @@ package simple.tags_list
 
 import org.scalajs.dom
 import org.scalajs.dom.Event
-import org.scalajs.dom.html.Button
 import org.scalajs.dom.raw.HTMLStyleElement
-import rx.{Rx, Var}
+import rx.{Ctx, Rx, Var}
 import simple.SharedModel.Tags
 import simple.helper.RxToFrag._
-
-import scalatags.JsDom.all._
-import scalacss.ScalatagsCss._
 import scalacss.Defaults._
-import scalatags.JsDom.TypedTag
+import scalacss.ScalatagsCss._
+import scalatags.JsDom.all._
 
-class TagsList(mailTags: Var[Tags], userTags: Var[Tags]) {
+class TagsList(mailTags: Var[Tags], userTags: Var[Tags])(implicit owner: Ctx.Owner) {
 
-  def rmTerm(term: String): (Event) => Unit = (e: dom.Event) => {
-    mailTags() = Tags(mailTags().tags.filterNot(_ == term))
-    userTags() = Tags(userTags().tags.filterNot(_ == term))
-  }
 
+  // list of li elements
   val liRx = Rx {
-    (mailTags().tags ::: userTags().tags).distinct.map(tag => {
+    (mailTags().tags ::: userTags().tags).distinct.map(tag =>
       li(
         TagsStyle.tagItem,
         button(TagsStyle.btn, onclick := rmTerm(tag), "-"),
         span(TagsStyle.label, tag)
       )
-    }
     )
   }
-  val ulDiv = ul(TagsStyle.tagsList, liRx).render
-  val btn = button(TagsStyle.btn, `type` := "button", "+").render
-  val tagInput = input(`class` := "form-control").render
 
-  btn.onclick = (e: dom.Event) => {
-    userTags() = Tags(userTags().tags :+ tagInput.value)
-    tagInput.value = ""
-  }
+  val tagInput = input(`class` := "form-control").render
 
   val searchList =
     div(
       TagsStyle.render[scalatags.JsDom.TypedTag[HTMLStyleElement]],
       TagsStyle.searchList,
-      ulDiv,
+      ul(
+        TagsStyle.tagsList,
+        liRx),
       div(
         TagsStyle.inputTags,
         tagInput,
-        btn
+        button(TagsStyle.btn, `type` := "button", "+", onclick := addTag)
       )
     ).render
+
+
+  def addTag = (e: dom.Event) => {
+    val currentTags = userTags.now.tags
+    userTags() = Tags(currentTags :+ tagInput.value)
+    tagInput.value = ""
+  }
+
+  def rmTerm(term: String): (Event) => Unit = (e: dom.Event) => {
+    mailTags() = Tags(mailTags.now.tags.filterNot(_ == term))
+    userTags() = Tags(userTags.now.tags.filterNot(_ == term))
+  }
+
 }

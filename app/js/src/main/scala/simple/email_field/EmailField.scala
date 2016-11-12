@@ -1,29 +1,29 @@
 package simple.email_field
 
 import org.scalajs.dom
-import rx.Var
+import rx.{Ctx, Rx, Var}
 import simple.EmailValidation.mailValid
-
-import scala.util.Try
+import simple.helper.RxToFrag._
 import scalatags.JsDom.all._
 
-class EmailField(validEmail: Var[String]) {
+class EmailField(validEmail: Var[String])(implicit owner: Ctx.Owner) {
 
-  val helpText = p(id := "emailHelp", `class` := "form-text text-muted", "Email not valid").render
+  val helpText = Rx {
+    if (validEmail().isEmpty) p(id := "emailHelp", `class` := "form-text text-muted", "Please enter a valid email")
+    else span()
+  }
+
   val mailIn = input(`type` := "email", `class` := "form-control", id := "mailInput", placeholder := "Enter email").render
   val mailDiv = div(
     `class` := "form-group",
     label(`for` := "mailInput", "Email address", aria.describedby := "emailHelp"),
-    mailIn
+    mailIn,
+    helpText
   ).render
 
-  mailIn.onchange = (e: dom.Event) => {
-      val mail = mailIn.value
-      if (!mailValid(mail) && mail.nonEmpty)
-        mailDiv.appendChild(helpText)
-      else if(mail.nonEmpty) {
-        validEmail() = mail
-        Try(mailDiv.removeChild(helpText))
-      }
-    }
+  mailIn.onkeyup = (e: dom.Event) => {
+    val mail = mailIn.value
+    if (!mailValid(mail)) validEmail() = ""
+    else if (mail.nonEmpty) validEmail() = mail
+  }
 }

@@ -11,7 +11,7 @@ val app = crossProject.settings(
     "io.circe" %%% "circe-core" % "0.2.0",
     "io.circe" %%% "circe-parse" % "0.2.0",
     "io.circe" %%% "circe-generic" % "0.2.0",
-    "com.lihaoyi" %%% "scalarx" % "0.2.8",
+    "com.lihaoyi" %%% "scalarx" % "0.3.2",
     "com.github.japgolly.scalacss" %%% "core" % "0.5.1",
     "com.github.japgolly.scalacss" %%% "ext-scalatags" % "0.5.1"
   ),

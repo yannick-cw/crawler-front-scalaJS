@@ -21,7 +21,7 @@ object Server {
 
     val basePage = HttpEntity(ContentTypes.`text/html(UTF-8)`, Page.skeleton.render)
 
-    val connection = HttpConnection("104.198.201.227", 8080)
+    val connection = HttpConnection(system.settings.config.getString("crawler.host"), system.settings.config.getInt("crawler.port"))
 
     val basePageRoute: Route = get(pathSingleSlash(complete(basePage))) ~ getFromResourceDirectory("")
 

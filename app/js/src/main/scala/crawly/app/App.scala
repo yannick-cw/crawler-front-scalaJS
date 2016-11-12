@@ -38,10 +38,11 @@ object App {
     def register = (e: Event) => Requester.register(validEmail.now, Tags(mailTags.now.tags ::: userTags.now.tags))
     document.head.appendChild(MainStyle.render[scalatags.JsDom.TypedTag[HTMLStyleElement]].render)
 
-    val subBtn = input(AppStyle.submitBtn, `type` := "submit", "register").render
+    val subBtn = input(AppStyle.submitBtn, `type` := "submit").render
     submitNotReady.trigger{ subBtn.disabled = submitNotReady.now }
 
-    document.body.appendChild(header(h1(Texts.header)).render)
+    document.body.appendChild(header(h2(Texts.header)).render)
+    document.body.appendChild(meta(name:= "viewport", content:="width=device-width, initial-scale=1").render)
     document.body.appendChild(
       div(
         AppStyle.app,
@@ -63,6 +64,6 @@ object App {
         )
       ).render
     )
-    document.body.appendChild(footer(p(Texts.footer)).render)
+//    document.body.appendChild(footer(p(Texts.footer)).render)
   }
 }

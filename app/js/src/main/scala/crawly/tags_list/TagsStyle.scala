@@ -24,7 +24,7 @@ object TagsStyle extends StyleSheet.Inline {
   )
 
   val label = style(
-    addClassNames("label", "label-success"),
+    addClassNames("label", "label-default"),
     marginLeft(7 px),
     fontWeight._600,
     fontSize.large,
@@ -38,7 +38,7 @@ object TagsStyle extends StyleSheet.Inline {
   )
 
   val btn = style(
-    addClassNames("btn", "btn-primary"),
-    marginLeft(10 px)
+    marginLeft(7 px),
+    addClassNames("btn", "btn-outline-success")
   )
 }

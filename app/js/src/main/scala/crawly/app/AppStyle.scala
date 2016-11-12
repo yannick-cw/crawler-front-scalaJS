@@ -10,12 +10,14 @@ object AppStyle  extends StyleSheet.Inline {
   val container = style(
     boxShadow := "0px -6px 13px -8px black",
     margin(0 px, auto),
-    padding(5 px),
+    padding(10 px),
     marginTop(-35 px),
     maxWidth(600 px),
+    width(100%%),
     minWidth(300 px),
     backgroundColor.white,
-    height.inherit
+    height.inherit,
+    borderRadius(2 px)
   )
 
   val formContainer = style(
@@ -24,7 +26,7 @@ object AppStyle  extends StyleSheet.Inline {
   )
 
   val submitBtn = style(
-    addClassNames("btn", "btn-primary"),
+    addClassNames("btn", "btn-outline-success"),
     alignSelf.center,
     padding(10 px, 32 px)
   )

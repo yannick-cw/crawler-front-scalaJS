@@ -19,7 +19,7 @@ object MainStyle extends StyleSheet.Standalone {
   )
 
   "header" - (
-    backgroundColor(c"#343434"),
+    backgroundColor(c"#5cb85c"),
     height(100 px),
     color.white,
     textAlign.center,

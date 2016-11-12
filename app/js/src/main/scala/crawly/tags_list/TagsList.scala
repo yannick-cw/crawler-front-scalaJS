@@ -19,7 +19,7 @@ class TagsList(mailTags: Var[Tags], userTags: Var[Tags])(implicit owner: Ctx.Own
     (mailTags().tags ::: userTags().tags).distinct.map(tag =>
       li(
         TagsStyle.tagItem,
-        button(TagsStyle.btn, onclick := rmTerm(tag), "-"),
+        button(`class` := "btn btn-outline-danger", `type` := "button", onclick := rmTerm(tag), "-"),
         span(TagsStyle.label, tag)
       )
     )

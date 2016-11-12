@@ -1,4 +1,4 @@
-package simple
+package crawly
 
 import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto._

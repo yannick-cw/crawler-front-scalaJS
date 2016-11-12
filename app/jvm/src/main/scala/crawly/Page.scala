@@ -1,9 +1,9 @@
-package simple
+package crawly
 
 import scalatags.Text.all._
 object Page {
 
-  val boot = "simple.app.App().main(document)"
+  val boot = "crawly.app.App().main(document)"
 
   val skeleton =
     html(

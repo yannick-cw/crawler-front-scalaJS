@@ -1,4 +1,4 @@
-package simple.tags_list
+package crawly.tags_list
 
 
 import scalacss.Defaults._
@@ -12,6 +12,8 @@ object TagsStyle extends StyleSheet.Inline {
   val tagsList = style(
     display.flex,
     flexDirection.column,
+    flexWrap.wrap,
+    maxHeight(200 px),
     paddingLeft(0 px)
   )
 
@@ -22,6 +24,7 @@ object TagsStyle extends StyleSheet.Inline {
   )
 
   val label = style(
+    addClassNames("label", "label-success"),
     marginLeft(7 px),
     fontWeight._600,
     fontSize.large,

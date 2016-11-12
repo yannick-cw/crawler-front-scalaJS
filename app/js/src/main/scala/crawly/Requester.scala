@@ -1,9 +1,9 @@
-package simple
+package crawly
 
+import crawly.SharedModel.Tags
 import io.circe.parse._
 import io.circe.syntax._
 import org.scalajs.dom.ext._
-import simple.SharedModel.Tags
 
 import scala.concurrent.Future
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue

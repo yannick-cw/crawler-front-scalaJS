@@ -1,10 +1,10 @@
-package simple.email_field
+package crawly.email_field
 
 import org.scalajs.dom
 import rx.{Ctx, Rx, Var}
-import simple.EmailValidation.mailValid
-import simple.helper.RxToFrag._
 import scalatags.JsDom.all._
+import crawly.helper.RxToFrag._
+import crawly.EmailValidation._
 
 class EmailField(validEmail: Var[String])(implicit owner: Ctx.Owner) {
 
@@ -13,12 +13,11 @@ class EmailField(validEmail: Var[String])(implicit owner: Ctx.Owner) {
     else span()
   }
 
-  val mailIn = input(`type` := "email", `class` := "form-control", id := "mailInput", placeholder := "Enter email").render
+  val mailIn = input(`type` := "email", `class` := "form-control", placeholder := "Enter email").render
   val mailDiv = div(
     `class` := "form-group",
-    label(`for` := "mailInput", "Email address", aria.describedby := "emailHelp"),
     mailIn,
-    helpText
+    rxFrag(helpText)
   ).render
 
   mailIn.onkeyup = (e: dom.Event) => {

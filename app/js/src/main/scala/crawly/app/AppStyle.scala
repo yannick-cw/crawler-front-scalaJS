@@ -1,4 +1,4 @@
-package simple.app
+package crawly.app
 import scalacss.Defaults._
 object AppStyle  extends StyleSheet.Inline {
   import dsl._
@@ -8,9 +8,13 @@ object AppStyle  extends StyleSheet.Inline {
   )
 
   val container = style(
-    marginTop(20 px),
-    maxWidth(800 px),
-    backgroundColor.ghostwhite,
+    boxShadow := "0px -6px 13px -8px black",
+    margin(0 px, auto),
+    padding(5 px),
+    marginTop(-35 px),
+    maxWidth(600 px),
+    minWidth(300 px),
+    backgroundColor.white,
     height.inherit
   )
 

@@ -1,11 +1,12 @@
-package simple.tags_list
+package crawly.tags_list
 
+import crawly.SharedModel.Tags
 import org.scalajs.dom
 import org.scalajs.dom.Event
 import org.scalajs.dom.raw.HTMLStyleElement
 import rx.{Ctx, Rx, Var}
-import simple.SharedModel.Tags
-import simple.helper.RxToFrag._
+import crawly.helper.RxToFrag._
+
 import scalacss.Defaults._
 import scalacss.ScalatagsCss._
 import scalatags.JsDom.all._
@@ -32,7 +33,7 @@ class TagsList(mailTags: Var[Tags], userTags: Var[Tags])(implicit owner: Ctx.Own
       TagsStyle.searchList,
       ul(
         TagsStyle.tagsList,
-        liRx),
+        rxFrag(liRx, TagsStyle.tagsList)),
       div(
         TagsStyle.inputTags,
         tagInput,

@@ -1,4 +1,4 @@
-package simple
+package crawly
 
 object EmailValidation {
   def mailValid(mail: String) = regex.findFirstIn(mail).isDefined

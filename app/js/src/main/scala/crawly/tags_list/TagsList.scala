@@ -25,7 +25,7 @@ class TagsList(mailTags: Var[Tags], userTags: Var[Tags])(implicit owner: Ctx.Own
     )
   }
 
-  val tagInput = input(`class` := "form-control").render
+  val tagInput = input(`class` := "form-control", placeholder := "enter search terms").render
 
   val searchList =
     div(

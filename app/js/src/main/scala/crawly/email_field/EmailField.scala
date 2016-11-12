@@ -9,7 +9,7 @@ import crawly.EmailValidation._
 class EmailField(validEmail: Var[String])(implicit owner: Ctx.Owner) {
 
   val currentMail = Var("")
-  val mailIn = input(`type` := "email", `class` := "form-control", placeholder := "Enter email").render
+  val mailIn = input(`type` := "email", `class` := "form-control", placeholder := "enter email").render
   val helpText = Rx {
     if (validEmail().isEmpty && currentMail().nonEmpty) small(`class` := "form-text text-muted", "Please enter a valid email")
     else span()

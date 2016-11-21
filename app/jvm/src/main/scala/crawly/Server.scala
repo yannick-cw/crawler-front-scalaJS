@@ -21,7 +21,7 @@ object Server {
 
     val basePage = HttpEntity(ContentTypes.`text/html(UTF-8)`, Page.skeleton.render)
 
-    val connection = HttpConnection(system.settings.config.getString("crawler.host"), system.settings.config.getInt("crawler.port"))
+    val connection = HttpConnection(system.settings.config.getString("tags.host"), system.settings.config.getInt("tags.port"))
 
     val basePageRoute: Route = get(pathSingleSlash(complete(basePage))) ~ getFromResourceDirectory("")
 
@@ -49,7 +49,18 @@ object Server {
         }
       }
 
-    Http().bindAndHandle(basePageRoute ~ tagsRoute ~ registerRoute, "0.0.0.0", 8080)
+    val unsubscribeRoute: Route =
+      path("unsubscribe" / Segment) { email =>
+        get {
+          val uri: Uri = Uri(s"/tags/$email?tags")
+          val request = HttpRequest(uri = uri, method = HttpMethods.POST)
+          complete(connection.runWith(request)
+            .map(_ => HttpEntity(ContentTypes.`text/html(UTF-8)`, UnsubscribePage.skeleton.render))
+          )
+        }
+      }
+
+    Http().bindAndHandle(basePageRoute ~ tagsRoute ~ registerRoute ~ unsubscribeRoute, "0.0.0.0", 8080)
   }
 }
 

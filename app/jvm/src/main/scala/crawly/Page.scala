@@ -15,3 +15,12 @@ object Page {
       body(onload:=boot)
     )
 }
+
+object UnsubscribePage {
+  val skeleton =
+    html(
+      body(
+        h1("You successfully unscubscribed")
+      )
+    )
+}
